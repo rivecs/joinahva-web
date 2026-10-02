@@ -1,55 +1,22 @@
 # joinahva.com
 
-The official website for AHVA (Hemp & Vape Advocacy).
+I built AHVA’s production site to keep public advocacy and education, member pages, and admin workflows in one system with clear boundaries between them.
 
-This is a real production site built to support public education, member access, and internal administration for an advocacy organization. It was designed and developed with long-term maintainability in mind, not as a demo or experiment.
+## Technology
 
-## What this site does
-
-- Presents public-facing advocacy and educational content
-- Supports member-only pages behind authentication
-- Includes an admin area for managing internal workflows
-- Keeps public, member, and admin functionality clearly separated
-
-The site needed to be fast, predictable, and easy to extend without breaking unrelated parts of the system.
-
-## Tech Used
-
-- HTML5
-- CSS3 (global styles plus page-scoped styles)
+- HTML and CSS
 - Vanilla JavaScript
-- A custom client-side loader for:
-  - Injecting HTML partials
-  - Dynamically loading page-specific CSS and JS
-  - Handling routing and access control
 - Supabase for authentication and backend services
+- A small client-side loader for shared page fragments, routing, page-scoped CSS and JavaScript, and access checks
 
-No frontend framework was used on purpose. The goal was clarity and control rather than abstraction.
+## Build decisions
 
-## How it’s structured
+I kept the front end framework-free because I wanted control and code that is easy to trace when something changes. Page-scoped styles and scripts keep unrelated pages from interfering with one another.
 
-- Pages are assembled from partials instead of full reloads
-- Each page can load only the CSS and JS it actually needs
-- Routing distinguishes between public, member, and admin access
-- Authentication and redirects are handled centrally
-- Shared UI elements like navigation are reused across the site
+I evolved the production site in small steps instead of risking a one-shot rewrite. Sensitive logic stays server-side, and client-side access checks are defensive rather than the security boundary.
 
-This approach makes the site easier to debug, easier to reason about, and less fragile as it grows.
+## Links
 
-## Design and development approach
-
-This project reflects real production tradeoffs:
-
-- Choosing simplicity over trendy stacks
-- Optimizing for maintainability instead of speed of initial development
-- Writing defensive code because content, requirements, and contributors change
-
-It was built incrementally and refactored as needed, the way most real websites actually are.
-
-## Live Site
-
-https://joinahva.com
-
-## My Site
-
-https://aerovisus.com
+- [AHVA](https://joinahva.com)
+- [Decision log](https://github.com/rivecs/joinahva-web/blob/main/decisions.md)
+- [Portfolio project notes](https://portfolio.aerovisus.com/#ahva)
