@@ -1,51 +1,21 @@
-# Project Overview
+# Project overview
 
-joinahva.com is a production website built for the non-profit Alabama Hemp & Vape Association - AHVA (Hemp & Vape Advocacy). Its primary role is to deliver public-facing advocacy content while supporting authenticated member access and administrative workflows.
+joinahva.com is the production website for the Alabama Hemp & Vape Association. It serves three groups: visitors looking for public advocacy and educational material, members with authenticated pages, and admins who manage the site.
 
-This project was built under real constraints: evolving requirements, performance expectations, limited tolerance for breakage, and the need for long-term maintainability. It is not a demo project and was never intended to be one.
+## Site structure
 
-## Scope
+- Pages are assembled from HTML partials.
+- A small loader handles routes and shared navigation and auth behavior.
+- Page CSS and JavaScript are scoped so unrelated pages do not pick up each other’s changes.
+- Supabase backs authentication and related backend services.
 
-The site supports three primary access levels:
+Access checks in the browser help the interface show the right pages, but they are not the security boundary. Sensitive decisions stay server-side.
 
-- **Public**: Educational and advocacy content available to all visitors
-- **Member**: Authenticated content restricted to approved users
-- **Admin**: Internal tools and pages for site management
+## Why the site is structured this way
 
-Each access level is treated as a first-class concern in both routing and asset loading.
+This is a live site with changing requirements. I chose a small, framework-free front end and incremental changes so I can trace what a page does and validate each change without turning the whole site into a rewrite.
 
-## High-level structure
+## Links
 
-- Pages are composed from HTML partials loaded dynamically
-- CSS and JavaScript are scoped per page whenever possible
-- Shared functionality (navigation, auth state, redirects) is centralized
-- Authentication and role checks occur before protected content loads
-
-This structure allows new pages and features to be added without unintentionally impacting unrelated areas of the site.
-
-## Goals
-
-- Predictable behavior across browsers
-- Minimal global side effects
-- Clear separation of concerns
-- Easy debugging without build tooling
-- Incremental improvement over time
-
-The emphasis is on stability and clarity rather than novelty.
-
-## Non-goals
-
-- Rebuilding the site as a single-page application
-- Introducing heavy frameworks or build steps
-- Optimizing for developer hype or trends
-
-This project prioritizes ownership and control over abstraction.
-
-## Live Site
-
-https://joinahva.com
-
-## My Site
-
-htts://aerovisus.com
-
+- [AHVA](https://joinahva.com)
+- [Portfolio notes](https://portfolio.aerovisus.com/#ahva)
