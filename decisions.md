@@ -1,89 +1,25 @@
-# Technical Decisions
+# Technical decisions
 
-This document outlines the major technical decisions made during the development of joinahva.com and the reasoning behind them.
+These are the choices that shape the joinahva.com front end and how it handles a live site with public, member, and admin areas.
 
-## No frontend framework
+## Plain HTML, CSS, and JavaScript
 
-The site uses plain HTML, CSS, and vanilla JavaScript.
+The pages use native browser technologies rather than a front-end framework. The requirements did not call for a client-side application framework, and the smaller setup makes page behavior easier to trace in production.
 
-**Why:**
-- Full control over behavior and performance
-- No framework lock-in
-- Easier debugging in production
-- Lower long-term maintenance cost
+## A small loader, scoped page assets
 
-Frameworks solve many problems, but they also introduce complexity that was unnecessary for this project’s requirements.
+A client-side loader routes to page partials and loads each page’s CSS and JavaScript. Shared navigation and auth behavior stay centralized; page-specific code stays close to the page that uses it. This adds some manual wiring, but it limits global side effects and makes failures easier to isolate.
 
-## Custom loader system
+## Access checks and the security boundary
 
-A custom client-side loader handles:
-- Route-based page loading
-- Partial HTML injection
-- Page-scoped CSS and JS
-- Access control for public, member, and admin pages
+The interface distinguishes public, member, and admin areas. Browser checks help route people and avoid showing the wrong screen; they are not treated as the security boundary. Authentication and sensitive access logic stay in the backend, with Supabase providing authentication and related services.
 
-**Why:**
-- Prevents global CSS/JS bleed
-- Reduces unnecessary asset loading
-- Keeps page behavior explicit
-- Makes failures easier to isolate
+## Change the production site in small steps
 
-This approach trades convenience for predictability.
+I have kept improving the production site incrementally instead of replacing it in one pass. That makes each change easier to inspect and lowers the risk of breaking unrelated pages.
 
-## Page-scoped assets
+## Links
 
-Each page can define its own CSS and JavaScript files.
-
-**Why:**
-- Avoids “mystery styles” affecting unrelated pages
-- Encourages modular thinking
-- Reduces regression risk when making changes
-
-Global styles are kept intentionally small and conservative.
-
-## Incremental refactoring over rewrites
-
-The site was improved and reorganized over time rather than rebuilt all at once.
-
-**Why:**
-- Production sites rarely allow clean rewrites
-- Incremental changes reduce risk
-- Easier to validate behavior after each change
-
-This reflects how real-world systems evolve.
-
-## Supabase for auth and backend services
-
-Supabase is used for authentication and related backend needs.
-
-**Why:**
-- Reduces custom backend maintenance
-- Provides reliable auth flows
-- Integrates cleanly with frontend-only architecture
-
-Sensitive logic remains server-side, while the frontend enforces access defensively.
-
-## Design priorities
-
-- Clarity over cleverness
-- Consistency over experimentation
-- UX decisions that support content, not decoration
-
-Visual polish and usability were treated as core requirements, not afterthoughts.
-
-## Tradeoffs accepted
-
-- Slightly more manual wiring in exchange for transparency
-- Fewer abstractions in exchange for control
-- More discipline required from future contributors
-
-These tradeoffs were deliberate and align with the long-term goals of the project.
-
-## Live Site
-
-https://joinahva.com
-
-## My Site
-
-https://aerovisus.com
-
+- [AHVA](https://joinahva.com)
+- [Project overview](https://github.com/rivecs/joinahva-web/blob/main/overview.md)
+- [Portfolio notes](https://portfolio.aerovisus.com/#ahva)
