@@ -1,22 +1,20 @@
-# joinahva.com
+# Alabama Hemp & Vape Association (AHVA)
 
-I built AHVA’s production site to keep public advocacy and education, member pages, and admin workflows in one system with clear boundaries between them.
+joinahva.com serves public advocacy and education alongside member pages and admin tools. Those areas have different access requirements, even though they live in one production site.
 
-## Technology
+## Technology and decisions
 
-- HTML and CSS
-- Vanilla JavaScript
+- HTML, CSS, and vanilla JavaScript
+- A small client-side loader for routes, shared page fragments, and page-scoped assets
 - Supabase for authentication and backend services
-- A small client-side loader for shared page fragments, routing, page-scoped CSS and JavaScript, and access checks
 
-## Build decisions
+I left out a front-end framework. The loader keeps page behavior explicit, and each page can bring its own CSS and JavaScript. The client-side checks are not the security boundary; sensitive access logic stays server-side. The site has grown through small production changes rather than a risky one-shot rewrite.
 
-I kept the front end framework-free because I wanted control and code that is easy to trace when something changes. Page-scoped styles and scripts keep unrelated pages from interfering with one another.
-
-I evolved the production site in small steps instead of risking a one-shot rewrite. Sensitive logic stays server-side, and client-side access checks are defensive rather than the security boundary.
+This public repository contains project notes, not the production site source.
 
 ## Links
 
 - [AHVA](https://joinahva.com)
-- [Decision log](https://github.com/rivecs/joinahva-web/blob/main/decisions.md)
-- [Portfolio project notes](https://portfolio.aerovisus.com/#ahva)
+- [Project overview](https://github.com/rivecs/joinahva-web/blob/main/overview.md)
+- [Technical decisions](https://github.com/rivecs/joinahva-web/blob/main/decisions.md)
+- [Portfolio notes](https://portfolio.aerovisus.com/#ahva)
